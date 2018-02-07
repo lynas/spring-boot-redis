@@ -1,6 +1,6 @@
 package com.lynas.demoredis.dao.impl;
 
-import com.lynas.demoredis.dao.AppUserRepository;
+import com.lynas.demoredis.dao.RedisRepository;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
@@ -9,12 +9,12 @@ import javax.annotation.PostConstruct;
 import java.util.Map;
 
 @Repository
-public class AppUserRepositoryImpl implements AppUserRepository {
+public class RedisRepositoryImpl implements RedisRepository {
 
     private final RedisTemplate<String, Object> redisTemplate;
     private HashOperations hashOps;
 
-    public AppUserRepositoryImpl(RedisTemplate<String, Object> redisTemplate) {
+    public RedisRepositoryImpl(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
