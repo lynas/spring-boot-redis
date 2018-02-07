@@ -5,7 +5,7 @@ import com.lynas.demoredis.model.AppUser;
 import java.util.Map;
 
 public interface AppUserRepository {
-    void save(AppUser user);
-    Map<String, AppUser> findAll();
-    AppUser findById(String id);
+    void save(String key, String hashKey, Object value);
+    Map<String, Object> findAll(String  key);
+    Object findById(String  key, String id);
 }

@@ -1,7 +1,6 @@
 package com.lynas.demoredis.dao.impl;
 
 import com.lynas.demoredis.dao.AppUserRepository;
-import com.lynas.demoredis.model.AppUser;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,8 +10,6 @@ import java.util.Map;
 
 @Repository
 public class AppUserRepositoryImpl implements AppUserRepository {
-
-    private static final String KEY = "APP_USER";
 
     private final RedisTemplate<String, Object> redisTemplate;
     private HashOperations hashOps;
@@ -29,17 +26,16 @@ public class AppUserRepositoryImpl implements AppUserRepository {
 
 
     @Override
-    public void save(AppUser user) {
-        hashOps.put(KEY, user.getId(), user);
+    public void save(String  key, String  hashKey, Object value) {
+        hashOps.put(key, hashKey, value);
     }
 
     @Override
-    public Map<String, AppUser> findAll() {
-        return hashOps.entries(KEY);
+    public Map<String, Object> findAll(String  key) {
+        return hashOps.entries(key);
     }
 
-    @Override
-    public AppUser findById(String id) {
-        return (AppUser) hashOps.get(KEY, id);
+    public Object findById(String  key, String id) {
+        return hashOps.get(key, id);
     }
 }
